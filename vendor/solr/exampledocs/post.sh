@@ -1,3 +1,4 @@
+#!/bin/sh
 # Licensed to the Apache Software Foundation (ASF) under one or more
 # contributor license agreements.  See the NOTICE file distributed with
 # this work for additional information regarding copyright ownership.
@@ -13,46 +14,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#-----------------------------------------------------------------------
-# a couple of test stopwords to test that the words are really being
-# configured from this file:
-stopworda
-stopwordb
+FILES=$*
+URL=http://localhost:8983/solr/update
 
-#Standard english stop words taken from Lucene's StopAnalyzer
-a
-an
-and
-are
-as
-at
-be
-but
-by
-for
-if
-in
-into
-is
-it
-no
-not
-of
-on
-or
-s
-such
-t
-that
-the
-their
-then
-there
-these
-they
-this
-to
-was
-will
-with
+for f in $FILES; do
+  echo Posting file $f to $URL
+  curl $URL --data-binary @$f -H 'Content-type:text/xml; charset=utf-8' 
+  echo
+done
 
+#send the commit command to make sure all the changes are flushed and visible
+curl $URL --data-binary '<commit/>' -H 'Content-type:text/xml; charset=utf-8'
+echo
