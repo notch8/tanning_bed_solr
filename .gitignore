@@ -1,3 +1,6 @@
+announcement.txt
+coverage
+doc
 pkg/*
 vendor/solr/solr/data/*
 vendor/solr/logs/*

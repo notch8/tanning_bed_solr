@@ -13,5 +13,6 @@ Bones {
   authors  'Rob Kaufman'
   email    'rob@notch8.com'
   url      'http://notch8.com'
+  ignore_file  '.gitignore'
 }
 
